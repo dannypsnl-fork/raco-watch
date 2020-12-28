@@ -1,10 +1,10 @@
 #lang scribble/manual
-@require[@for-label[racket-project
+@require[@for-label[raco-watch
                     racket/base]]
 
-@title{racket-project}
+@title{raco-watch}
 @author{Lîm Tsú-thuàn}
 
-@defmodule[racket-project]
+@defmodule[raco-watch]
 
 Package Description Here
