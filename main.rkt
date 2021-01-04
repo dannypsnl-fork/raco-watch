@@ -18,4 +18,6 @@
         (list (current-directory))
         (map string->path target-path*))))
 
-  (thread-wait (watch path* (lambda (lst) (system (cmd))))))
+  (let loop ()
+    (thread-wait (watch path* (lambda (lst) (system (cmd)))))
+    (loop)))
