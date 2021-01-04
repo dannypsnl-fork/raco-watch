@@ -1,24 +1,21 @@
 #lang racket
 
+(require file-watchers)
+
 (module+ main
-  (require racket/cmdline)
+  (require racket/cmdline
+           racket/system
+           raco/command-name)
 
-  (define who (make-parameter "world"))
-  (command-line
-    #:program "raco-watch"
+  (define cmd (make-parameter "world"))
+  (define path*
+    (command-line
+    #:program (short-program+command-name)
     #:once-each
-    [("-n" "--name") name "Who to say hello to" (who name)]
-    #:args ()
-    (printf "hello ~a~n" (who))))
+    [("-c" "--command") c "command to run" (cmd c)]
+    #:args target-path*
+    (if (empty? target-path*)
+        (list (current-directory))
+        (map string->path target-path*))))
 
-(module+ test
-  (require rackunit)
-
-  (define expected 1)
-  (define actual 1)
-
-  (test-case
-    "Example Test"
-    (check-equal? actual expected ))
-
-  (test-equal? "Shortcut Equal Test" actual expected))
+  (thread-wait (watch path* (lambda (lst) (system (cmd))))))

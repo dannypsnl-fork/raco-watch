@@ -7,4 +7,4 @@
 
 @defmodule[raco-watch]
 
-Package Description Here
+A command line tool
