@@ -7,4 +7,4 @@
 (define version "0.0")
 (define pkg-authors '(dannypsnl))
 (define raco-commands
-  '(("watch" raco-watch/main "watch and eval command" #f)))
+  '(("watch" (submod raco-watch/main main) "watch and eval command" #f)))
